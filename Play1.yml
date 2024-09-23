@@ -1,6 +1,7 @@
 ---
 - name: starting process
   hosts: localhost
+  become: yes
   become_user: root
   vars:
     - service_name: apache2
@@ -11,3 +12,4 @@
      service:
        name: "{{ service_name }}"
        state: "{{ type }}"
+       enabled: yes
