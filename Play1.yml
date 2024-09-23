@@ -1,0 +1,14 @@
+---
+- name: starting process
+ hosts: localhost
+ become: yes
+ vars:
+   - service_name: apache2
+   - type: started
+ 
+ tasks:
+ - name: To start process
+   ansible.builtin.service:
+     name: "{{ service_name }}"
+     state: "{{ type }}"
+   register: process
