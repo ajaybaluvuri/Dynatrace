@@ -3,7 +3,7 @@
   hosts: localhost
   become_user: root
   vars:
-    - service_name: apache2
+    - service_name: httpd
     - type: started
  
   tasks:
