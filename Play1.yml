@@ -4,11 +4,10 @@
   become_user: root
   vars:
     - service_name: apache2
-    - type: started
+    - type: restarted
  
   tasks:
    - name: To start process
      service:
        name: "{{ service_name }}"
        state: "{{ type }}"
-     register: process
