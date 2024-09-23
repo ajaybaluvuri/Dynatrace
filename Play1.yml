@@ -1,7 +1,6 @@
 ---
 - name: starting process
   hosts: localhost
-  become: yes
   become_user: root
   vars:
     - service_name: apache2.service
