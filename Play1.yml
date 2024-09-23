@@ -8,8 +8,15 @@
     - type: restarted
  
   tasks:
-   - name: To start process
-     service:
-       name: "{{ service_name }}"
-       state: "{{ type }}"
-       enabled: yes
+    - name: Check if apache2 is installed
+      command: systemctl status apache2
+      register: apache2_status
+      ignore_errors: yes
+ 
+    - name: Debug apache2 status
+      debug:
+        var: apache2_status
+    - name: To start process
+      service:
+        name: "{{ service_name }}"
+        state: "{{ type }}"
