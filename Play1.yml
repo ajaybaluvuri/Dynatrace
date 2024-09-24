@@ -5,8 +5,12 @@
     - name: Ensure apache2 is installed
       ansible.builtin.apt:
         name: apache2
-        state: present
+        state: absent
      # when: ansible_os_family == 'Debian'
+    - name: Ensure apache2 is installed
+      ansible.builtin.apt:
+        name: apache2
+        state: present
  
     - name: Restart Apache service
       ansible.builtin.service:
