@@ -7,6 +7,11 @@
     - type: restarted
  
   tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+      become: yes
     - name: Restart Nginx
       ansible.builtin.service:
         name: "{{ service_name }}"
