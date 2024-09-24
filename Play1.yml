@@ -1,17 +1,14 @@
----
-- name: starting process
-  hosts: localhost
-  gather_facts: no
-  vars:
-    - service_name: ngnix
-    - type: restarted
- 
+- name: Ensure Apache is running
+  hosts: all
+  become: yes
   tasks:
-    - name: Install Nginx
-      apt:
-        name: nginx
+    - name: Ensure apache2 is installed
+      ansible.builtin.apt:
+        name: apache2
         state: present
-    - name: Restart Nginx
+      when: ansible_os_family == 'Debian'
+ 
+    - name: Restart Apache service
       ansible.builtin.service:
-        name: "{{ service_name }}"
-        state: "{{ type }}"
+        name: "{{ ansible_os_family == 'Debian' | ternary('apache2', 'httpd') }}"
+        state: restarted
