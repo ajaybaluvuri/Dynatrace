@@ -2,7 +2,7 @@
 - name: starting process
   hosts: localhost
   become: yes
-  become_method: sudo
+  become_method: su
   vars:
     - service_name: ngnix
     - type: restarted
