@@ -4,8 +4,6 @@
   gather_facts: no
   tasks:
     - name: Ensure apache2.4 is installed
-      wait_for_connection:
-        timeout: 30
       win_service:
         name: apache2.4
         state: absent
