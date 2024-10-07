@@ -1,5 +1,5 @@
 - name: Ensure Apache is running
-  hosts: Windows
+  hosts: all
   become: yes
   gather_facts: no
   tasks:
