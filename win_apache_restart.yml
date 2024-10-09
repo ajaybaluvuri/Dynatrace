@@ -1,8 +1,8 @@
 - name: Ensure Apache is running
   hosts: all
-  become: yes
   ansible_connection: winrm
   ansible_port: 5985
+  ansible_winrm_transport: basic
   gather_facts: no
   tasks:
     - name: Ensure apache2.4 is installed
