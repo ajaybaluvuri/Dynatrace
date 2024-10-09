@@ -1,6 +1,7 @@
 - name: Ensure Apache is running
   hosts: all
   become: yes
+  ansible_connection: ssh
   gather_facts: no
   tasks:
     - name: Ensure apache2.4 is installed
