@@ -5,14 +5,14 @@
   tasks:
     - name: Ensure apache2.4 is installed
       ansible.windows.win_service:
-        name: apache2
+        name: apache
         state: absent
      # when: ansible_os_family == 'Debian'
     - name: Ensure apache2.4 is installed
       ansible.windows.win_service:
-        name: apache2
+        name: apache
         state: present
     - name: Restart Apache service
       ansible.windows.win_service:
-        name: apache2
+        name: apache
         state: restarted
