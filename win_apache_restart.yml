@@ -1,6 +1,6 @@
 - name: Ensure Apache is running
   hosts: all
-  gather_facts: no
+  become: true
   tasks:
     - name: Ensure apache2.4 is installed
       win_service:
