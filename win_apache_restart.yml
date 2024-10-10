@@ -1,5 +1,5 @@
 - name: Ensure Apache is running
-  hosts: all
+  hosts: 172.31.87.46
   become: true
   tasks:
     - name: Ensure apache2.4 is installed
