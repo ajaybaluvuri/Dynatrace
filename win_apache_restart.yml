@@ -5,5 +5,5 @@
   tasks:
     - name: Restart Apache service
       win_service:
-        name: apache2
+        name: Apache2.4
         state: restarted
