@@ -1,5 +1,5 @@
 - name: Ensure Apache is running
-  hosts: all
+  hosts: windows
   gather_facts: no
   tasks:
     - name: Restart Apache service
