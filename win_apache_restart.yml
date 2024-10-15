@@ -1,6 +1,7 @@
 - name: Ensure Apache is running
   hosts: 172.31.87.46
   become: true
+  gather_facts: no
   tasks:
     - name: Ensure apache2.4 is installed
       win_service:
