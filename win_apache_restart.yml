@@ -4,11 +4,6 @@
   become: true
   gather_facts: no
   tasks:
-    - name: Check if Apache service is running
-      win_service_info:
-        name: Apache2.4
-      register: apache_status
- 
     - name: Start Apache if it's not running
       win_service:
         name: Apache2.4
