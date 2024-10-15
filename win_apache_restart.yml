@@ -8,10 +8,7 @@
       win_service:
         name: Apache2.4
         state: started
-      when: apache_status.status != 'Running'
- 
     - name: Restart Apache service (only if needed)
       win_service:
         name: Apache2.4
         state: restarted
-      when: apache_status.status == 'Running'
