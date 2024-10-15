@@ -1,5 +1,5 @@
 - name: Ensure Apache is running
-  hosts: 18.212.49.181
+  hosts: all
   become: true
   gather_facts: no
   tasks:
