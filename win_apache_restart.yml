@@ -1,14 +1,9 @@
 ---
-- name: Ensure Apache is running
+- name: Start Apache Service on Windows using PowerShell
   hosts: all
-  become: true
+  become: yes
   gather_facts: no
   tasks:
-    - name: Start Apache if it's not running
-      win_service:
-        name: Apache2.4
-        state: started
-    - name: Restart Apache service (only if needed)
-      win_service:
-        name: Apache2.4
-        state: restarted
+    - name: Start Apache service using PowerShell
+      win_shell: |
+        Start-Service -Name "Apache2.4"
