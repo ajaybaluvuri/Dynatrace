@@ -1,7 +1,6 @@
 ---
 - name: Start Apache Service on Windows using PowerShell
   hosts: all
-  become: yes
   gather_facts: no
   tasks:
     - name: Start Apache service using PowerShell
