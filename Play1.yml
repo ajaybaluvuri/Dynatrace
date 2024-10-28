@@ -20,7 +20,7 @@
       servicenow.servicenow.snow_record:
         username: admin
         password: 7fbhrN8^ED*B
-        instance: dev193710
+        instance: https://dev193710.service-now.com
         state: present
         data:
           short_description: "Apache service is not running"
