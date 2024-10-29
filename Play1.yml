@@ -9,7 +9,7 @@
         username: admin
         password: 7fbhrN8^ED*B
         instance: dev193710
-        state: present
+        state: new
         data:
           short_description: "Apache service is not running"
           severity: 3
