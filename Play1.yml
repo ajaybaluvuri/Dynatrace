@@ -17,7 +17,7 @@
         name: apache2
         state: restarted
     - name: Create an Incident
-      servicenow.servicenow.snow_record:
+      servicenow.itsm.incident:
         username: admin
         password: 7fbhrN8^ED*B
         instance: dev193710
