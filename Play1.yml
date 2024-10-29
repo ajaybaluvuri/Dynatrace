@@ -5,7 +5,7 @@
   gather_facts: no
   tasks:
     - name: Create an Incident
-      servicenow.itsm.incident:
+      servicenow.servicenow.snow_record:
         username: admin
         password: 7fbhrN8^ED*B
         instance: dev193710
