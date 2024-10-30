@@ -1,8 +1,6 @@
 ---
-- name: Create new Incident
-  hosts: all
-  become: yes
-  gather_facts: no
+- name: Create a new itsm incident
+  hosts: localhost
   tasks:
   - name: Create an Incident
     servicenow.servicenow.snow_record:
