@@ -1,6 +1,6 @@
 ---
 - name: Create new Incident
-  hosts: localhost
+  hosts: all
   become: yes
   gather_facts: no
   tasks:
@@ -9,7 +9,7 @@
       username: admin
       password: 7fbhrN8^ED*B
       instance: dev193710
-      state: new
+      state: present
       data:
         short_description: "Apache service is not running"
         severity: 3
