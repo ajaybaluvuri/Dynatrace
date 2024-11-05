@@ -1,6 +1,8 @@
 ---
 - name: Create a new itsm incident
   hosts: localhost
+  vars:
+    ansible_python_interpreter: ~/servicenow-env/bin/python
   tasks:
   - name: Create an Incident
     servicenow.servicenow.snow_record:
