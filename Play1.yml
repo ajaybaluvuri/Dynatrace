@@ -6,27 +6,17 @@
   environment:
     ANSIBLE_COLLECTIONS_PATHS: /usr/share/ansible/collections
   tasks:
-    - name: "CREATE incident"
-      ansible.builtin.uri:
-             url: "https://dev193710.service-now.com/" 
-             user: "{{ admin }}"
-             password: "{{ 7fbhrN8^ED*B }}"
-             method: POST
-             return_content: true
-             validate_certs: false
-             force_basic_auth: no
-             status_code: 201
-             body_format: form-multipart
-             headers:
-                 Accept: 'application/json'
-                 Content-Type: 'multipart/form-data'
-             body:
-               table_name:
-                   content: incident
-               table_sys_id:
-                   content: 'c6957640470388444c736d4315'
-      register: Incident
-
-    - name: Display details
+    - name: Create an Incident
+      servicenow.servicenow.snow_record:
+        username: admin
+        password: 7fbhrN8^ED*B
+        instance: dev193710
+        state: present
+        data:
+          short_description: "Apache service is not running"
+          severity: 3
+          priority: 2
+      register: new_incident
+    - name: Display incident details
       debug:
-         msg:"{{ Incident }}"
+        msg: "{{ new_incident }}"
