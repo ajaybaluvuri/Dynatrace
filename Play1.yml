@@ -32,7 +32,7 @@
           Content-Type: application/json
         body: |
           {
-          "short_description": "Apache server is not running",
+          "short_description": "Apache service is not running",
           "Priority": "2"
           }     
             # - name: Create an Incident
