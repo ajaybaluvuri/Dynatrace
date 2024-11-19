@@ -1,7 +1,8 @@
 ---
 - name: Create a new ITSM incident
   hosts: localhost
-  gather_facts: no
+  become: yes
+  gather_facts: yes
   collections:
     - servicenow.servicenow
       # vars:
@@ -9,18 +10,18 @@
   environment:
     ANSIBLE_COLLECTIONS_PATHS: /usr/share/ansible/collections/ansible_collections:~/.ansible/collections/ansible_collections/
   tasks:
-    # - name: Install pysnow library
-     # pip:
-     #   name:
-       #   - pysnow
-        #  - packaging
-     #   executable: /root/servicenow-env/bin/pip
+    - name: Install pysnow library
+      pip:
+        name:
+          - pysnow
+          - packaging
+        executable: /root/servicenow-env/bin/pip
     - name: Install ServiceNow collection
       ansible.builtin.shell:
         cmd: ansible-galaxy collection install servicenow.servicenow
       delegate_to: localhost
  
-    - name: Create inc in snow
+    - name: create an incident
       ansible.builtin.uri:
         url: https://dev193710.service-now.com/api/now/table/incident
         user: admin
@@ -32,20 +33,65 @@
           Content-Type: application/json
         body: |
           {
-          "short_description": "Apache service is not running",
+          "short_description": "Apache server is not running",
           "Priority": "2"
           }     
-            # - name: Create an Incident
-            #  snow_record:
-            #  username: admin
-            # password: 7fbhrN8^ED*B
-            # instance: dev193710
-          # state: present
-          #  data:
-       # short_description: "Apache service is not running"
-        #  severity: 3
-          # priority: 2
       register: new_incident
-    - name: Display incident details
+    - name: Display incident number
       debug:
-        msg: "{{ new_incident }}"
+         msg: "{{ new_incident }}"
+ 
+    - name: Ensure apche2 is installed
+      ansible.builtin.apt:
+        name: apache2
+        state: absent
+    - name: Ensure apache2 is installed
+      ansible.builtin.apt:
+        name: apache2
+        state: present
+      register: apache_status
+ 
+        # - name: Restart apache2 service
+        # ansible.builtin.apt:
+        # name: apache2
+        # state: restarted
+        #register: apache_status
+
+ 
+    - name: Display incident number
+      debug:
+        msg: "{{ new_incident.json.result.number }}"
+    - name: Display apache status
+      debug:
+        msg: "{{ apache_status }}"   
+    - name: to check process status
+      shell: ps -ef| grep apache2 | grep -v grep
+      ignore_errors: yes
+      changed_when: false
+      register: process_check
+ 
+    - name: display process
+      debug:
+        msg: "{{ process_check }}"
+    - name: closing incident if apache service is running
+      ansible.builtin.uri:
+        url: https://dev193710.service-now.com/api/now/table/incident/{{ new_incident.json.result.sys_id }}
+        user: admin
+        password: 7fbhrN8^ED*B
+        method: PATCH
+        force_basic_auth: true
+        headers:
+          Content-Type: "application/json"
+        body: |
+          {
+            "state": "7" ,
+            "close_code":  "Known error",
+            "close_notes": " Apache is running successfully"
+          }
+        status_code: 200
+      when: process_check.rc == 0
+      register: close_incident
+ 
+    - name: display status of closed incident
+      debug:
+        msg: "{{ close_incident }}"
