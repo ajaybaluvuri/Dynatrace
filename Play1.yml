@@ -1,8 +1,8 @@
 ---
 - name: Create a new ITSM incident
-  hosts: localhost
-  become: yes
-  gather_facts: no
+  hosts: all
+  become: true
+  #gather_facts: no
   collections:
     - servicenow.servicenow
       # vars:
