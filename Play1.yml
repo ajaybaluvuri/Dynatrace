@@ -10,16 +10,16 @@
   environment:
     ANSIBLE_COLLECTIONS_PATHS: /usr/share/ansible/collections/ansible_collections:~/.ansible/collections/ansible_collections/
   tasks:
-    - name: Install pysnow library
-      pip:
-        name:
-          - pysnow
-          - packaging
-        executable: /root/servicenow-env/bin/pip
-    - name: Install ServiceNow collection
-      ansible.builtin.shell:
-        cmd: ansible-galaxy collection install servicenow.servicenow
-      delegate_to: localhost
+   #- name: Install pysnow library
+    #  pip:
+     #   name:
+      #    - pysnow
+       #   - packaging
+        #executable: /root/servicenow-env/bin/pip
+   # - name: Install ServiceNow collection
+    #  ansible.builtin.shell:
+     #   cmd: ansible-galaxy collection install servicenow.servicenow
+      #delegate_to: localhost
  
     - name: create an incident
       ansible.builtin.uri:
